@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Rentora — Rent electronics, daily utilities, and more. Simple cart, dark/light mode, and responsive UI." />
+<meta name="keywords" content="Rentora, rental platform, rent electronics, rent gadgets, rent appliances, student rentals" />
+<title>Rentora — India's Favourite Rental Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="style.css" />
+<link rel="icon" href="data:,">
+<script>
+  // Prevents FOUC
+  (function() {
+    const THEME_KEY = 'rentora_theme';
+    try {
+      const saved = localStorage.getItem(THEME_KEY);
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = saved || (prefersDark ? 'dark' : 'light');
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      }
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body data-page="home">
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="index.html"><span>Rentora</span></a>
+    <nav>
+      <ul class="nav-links" style="list-style-type: none;">
+        <li><a href="products.html">Products</a></li>
+        <li><a href="categories.html">Categories</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <!--  ye dynamic hoga (Login/Signup ya Avatar) -->
+        <li id="auth-link"><a href="login.html">Login / Signup</a></li>
+      </ul>
+    </nav>
+
+    <button class="hamburger" id="hamburger" aria-label="Menu">☰</button>
+    <div class="user-dropdown" id="user-dropdown-container">
+      <button class="user-dropdown-btn" aria-label="User menu">
+        <i class="fas fa-user-circle"></i>
+      </button>
+      <div class="dropdown-menu">
+        <a href="rentals.html">My Rentals</a>
+        <a href="#" id="logout-btn">Logout</a>
+      </div>
+    </div>
+    <label class="switch" id="themeToggle" aria-label="Toggle theme" style="margin-right: 20px;">
+      <span class="sun"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="#ffd43b"><circle r="5" cy="12" cx="12"></circle><path d="m21 13h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm-17 0h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm13.66-5.66a1 1 0 0 1-.66-.29 1 1 0 0 1 0-1.41l.71-.71a1 1 0 1 1 1.41 1.41l-.71.71a1 1 0 0 1-.75.29zm-12.02 12.02a1 1 0 0 1-.71-.29 1 1 0 0 1 0-1.41l.71-.66a1 1 0 0 1 1.41 1.41l-.71.71a1 1 0 0 1-.7.24zm6.36-14.36a1 1 0 0 1-1-1v-1a1 1 0 0 1 2 0v1a1 1 0 0 1-1 1zm4.64 4.64a1 1 0 0 1-.71-.29 1 1 0 0 1 0-1.41l.71-.71a1 1 0 1 1 1.41 1.41l-.71.71a1 1 0 0 1-.7.29zm-16.02 0a1 1 0 0 1-.71-.29l-.71-.71a1 1 0 0 1 1.41-1.41l.71.71a1 1 0 0 1 0 1.41 1 1 0 0 1-.7.29zm14.02 12.02a1 1 0 0 1-.7-.29l-.71-.71a1 1 0 0 1 1.41-1.41l.71.71a1 1 0 0 1 0 1.41 1 1 0 0 1-.71.29zm1-6.02a1 1 0 0 1-1-1v-1a1 1 0 0 1 2 0v1a1 1 0 0 1-1 1z"></path></g></svg></span>
+      <span class="moon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="m223.5 32c-123.5 0-223.5 100.3-223.5 224s100 224 223.5 224c60.6 0 115.5-24.2 155.8-63.4 5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6-96.9 0-175.5-78.8-175.5-176 0-65.8 36-123.1 89.3-153.3 6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"></path></svg></span>    
+      <input type="checkbox" class="input">
+      <span class="slider"></span>
+    </label>
+  </div>
+</header>
+<a href="cart.html" data-quantity="0" class="btn-cart">
+          <svg class="icon-cart" viewBox="0 0 24.38 30.52" height="30.52" width="24.38" xmlns="http://www.w3.org/2000/svg">
+            <title>icon-cart</title>
+            <path transform="translate(-3.62 -0.85)" d="M28,27.3,26.24,7.51a.75.75,0,0,0-.76-.69h-3.7a6,6,0,0,0-12,0H6.13a.76.76,0,0,0-.76.69L3.62,27.3v.07a4.29,4.29,0,0,0,4.52,4H23.48a4.29,4.29,0,0,0,4.52-4ZM15.81,2.37a4.47,4.47,0,0,1,4.46,4.45H11.35a4.47,4.47,0,0,1,4.46-4.45Zm7.67,27.48H8.13a2.79,2.79,0,0,1-3-2.45L6.83,8.34h3V11a.76.76,0,0,0,1.52,0V8.34h8.92V11a.76.76,0,0,0,1.52,0V8.34h3L26.48,27.4a2.79,2.79,0,0,1-3,2.44Zm0,0"></path>
+          </svg>
+          <span class="quantity"></span>
+        </a>
+
+<main class="container home-page">
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Rent smarter. Save bigger.</h1>
+      <p>From gadgets to daily utilities — get what you need when you need it.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="products.html">Browse Products</a>
+        <a class="btn" href="categories.html">Explore Categories</a>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">📦</div>
+  </section>
+
+  <section class="features">
+    <div class="feature-card">
+      <h3>Fast Checkout</h3>
+      <p>Lightweight cart with localStorage. No sign-up required for demo.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Dark / Light</h3>
+      <p>Automatic theme detection + toggle persisted across pages.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Mobile First</h3>
+      <p>Optimized layout with clean responsive styles.</p>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <h4>Rentora</h4>
+      <p>India's favourite rental platform.</p>
+    </div>
+    <div>
+      <h4>Links</h4>
+      <ul>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="categories.html">Categories</a></li>
+        <li><a href="rentals.html">My Rentals</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Newsletter</h4>
+      <form class="newsletter" onsubmit="event.preventDefault(); alert('Subscribed!');">
+        <input type="email" placeholder="Enter your email" required="" style=" margin-bottom: 20px;">
+        <button class="btn">Subscribe</button>
+      </form>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <p>© <span id="year"></span> Rentora. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
+
