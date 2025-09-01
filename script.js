@@ -144,18 +144,23 @@
     if(theme==='dark'){ document.documentElement.classList.add('dark'); }
     else { document.documentElement.classList.remove('dark'); }
   }
-  function initTheme(){
-    const toggle = $('#themeToggle');
-    const input = $('#themeToggle .input');
-    if(input){
-      // Set initial state of the checkbox based on the <html> class
-      input.checked = document.documentElement.classList.contains('dark');
-      input.addEventListener('change', ()=>{
-        const next = input.checked ? 'dark' : 'light';
-        localStorage.setItem(THEME_KEY, next);
-        applyTheme(next);
-      });
-    }
+function initTheme(){
+  const saved = localStorage.getItem(THEME_KEY) || 'light'; // get saved theme
+  applyTheme(saved); // apply it on page load
+
+  const toggle = $('#themeToggle');
+  const input = $('#themeToggle .input');
+  if(input){
+    // Set checkbox based on saved theme
+    input.checked = (saved === 'dark');
+
+    input.addEventListener('change', ()=>{
+      const next = input.checked ? 'dark' : 'light';
+      localStorage.setItem(THEME_KEY, next);
+      applyTheme(next);
+    });
+}
+
   }
 
   // Nav
@@ -571,28 +576,31 @@
   }
 
   // On load
-  document.addEventListener('DOMContentLoaded', ()=>{
-    document.body.classList.add('fade-in');
-    initPageTransitions();
-    initTheme();
-    initNav();
-    initAuth(); // Initialize authentication
-    initContact();
-    initFAQ();
-    initTabs();
-    initProductModal();
-    renderProducts();
-    renderCart();
-    initCategoryLinks();
-    updateCartPill();
+document.addEventListener('DOMContentLoaded', ()=>{
+  const savedTheme = localStorage.getItem(THEME_KEY) || 'light';
+  applyTheme(savedTheme); // ensure applied as soon as possible
+  
+  document.body.classList.add('fade-in');
+  initPageTransitions();
+  initTheme();
+  initNav();
+  initAuth();
+  initContact();
+  initFAQ();
+  initTabs();
+  initProductModal();
+  renderProducts();
+  renderCart();
+  initCategoryLinks();
+  updateCartPill();
 
-    // Apply prefilter if set
-    const pre = localStorage.getItem('rentx_prefilter');
-    if(pre && location.pathname.endsWith('products.html')){
-      const btn = document.querySelector(`.filter-btn[data-filter="${pre}"]`);
-      if(btn){ btn.click(); localStorage.removeItem('rentx_prefilter'); }
-    }
-  });
+  const pre = localStorage.getItem('rentx_prefilter');
+  if(pre && location.pathname.endsWith('products.html')){
+    const btn = document.querySelector(`.filter-btn[data-filter="${pre}"]`);
+    if(btn){ btn.click(); localStorage.removeItem('rentx_prefilter'); }
+  }
+});
+
 })();
 
 
